@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TP_Calculator" default="build" basedir=".">
+
+
+    <property name="src.dir" value="src/main/java"/>
+    <property name="test.dir" value="src/test/java"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="docs.dir" value="docs"/>
+    <property name="lib.dir" value="lib"/>
+
+    <property name="main-class" value="com.app.Main"/>
+
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <!-- 1/__Créez un fichier build.xml pour automatiser les différentes étapes de votre projet avec Ant.__________ -->
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <mkdir dir="${docs.dir}"/>
+    </target>
+
+    <!-- 2/____________Configurez la tâche init pour créer les répertoires nécessaires (build, dist, docs)._____________ -->
+    <target name="build" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <!-- ______________3. Ajoutez une tâche build pour compiler votre code source avec javac.________________ -->
+    <target name="test" depends="build">
+        <javac srcdir="${test.dir}" destdir="${build.dir}" includeantruntime="false">
+            <classpath>
+                <path refid="classpath"/>
+                <pathelement path="${build.dir}"/>
+            </classpath>
+        </javac>
+
+        <junit printsummary="on" haltonfailure="true">
+            <classpath>
+                <path refid="classpath"/>
+                <pathelement path="${build.dir}"/>
+            </classpath>
+
+            <batchtest fork="true">
+                <fileset dir="${test.dir}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <!-- 4/ ____Ajoutez une tâche run pour exécuter l'application principale._______________________ -->
+    <target name="run" depends="build">
+        <java classname="${main-class}" fork="true">
+            <classpath>
+                <pathelement path="${build.dir}"/>
+                <path refid="classpath"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!-- 5/ ___________________________________________________ -->
+    <target name="jar" depends="build">
+        <jar destfile="${dist.dir}/calculator-app.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- 6/ ___________________________________________________ -->
+    <target name="doc">
+        <javadoc sourcepath="${src.dir}" destdir="${docs.dir}" packagenames="com.app.*"/>
+    </target>
+
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+        <delete dir="${docs.dir}"/>
+    </target>
+
+</project>

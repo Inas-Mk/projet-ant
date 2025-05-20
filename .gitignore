@@ -1,0 +1,8 @@
+build/
+dist/
+*.class
+*.log
+*.tmp
+*.iml
+.idea/
+.vscode/
