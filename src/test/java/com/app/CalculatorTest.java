@@ -9,7 +9,8 @@ public class CalculatorTest {
 
     @Test
     public void testAddition() {
-        assertEquals(15, calc.add(10, 5))}
+        assertEquals(15, calc.add(10, 5));
+    }
     @Test
     public void testSoustraction() {
         assertEquals(5, calc.subtract(10, 5));}
