@@ -2,7 +2,6 @@
 <project name="TP_Calculator" default="jar" basedir=".">
 
 
-
     <property name="src.dir" value="src/main/java"/>
     <property name="test.dir" value="src/test/java"/>
     <property name="build.dir" value="build"/>
@@ -75,7 +74,7 @@
         </jar>
     </target>
 
-    <!-- 6/ ___________________________________________________ -->
+    <!-- 6/ _________________________________ -->
     <target name="doc">
         <javadoc sourcepath="${src.dir}" destdir="${docs.dir}" packagenames="com.app.*"/>
     </target>
