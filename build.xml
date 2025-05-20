@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="TP_Calculator" default="build" basedir=".">
+<project name="TP_Calculator" default="jar" basedir=".">
+
 
 
     <property name="src.dir" value="src/main/java"/>
